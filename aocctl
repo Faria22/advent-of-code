@@ -4,16 +4,16 @@ set -euo pipefail
 usage() {
   cat >&2 <<'EOF'
 Usage (from a YEAR/dayDD directory):
-  tool download
-  tool run {python|rust}
-  tool submit {1|2} ANSWER
-  tool context
+  aocctl download
+  aocctl run {python|rust}
+  aocctl submit {1|2} ANSWER
+  aocctl context
 EOF
   exit 2
 }
 
 repo_root=$(git -C "$PWD" rev-parse --show-toplevel 2>/dev/null) || {
-  echo "tool must be run inside the Advent of Code repository." >&2
+  echo "aocctl must be run inside the Advent of Code repository." >&2
   exit 1
 }
 
@@ -22,7 +22,7 @@ if [[ $relative_dir =~ ^(20(1[5-9]|2[0-5]))/day(0[1-9]|1[0-9]|2[0-5])(/.*)?$ ]];
   year=${BASH_REMATCH[1]}
   day=$((10#${BASH_REMATCH[3]}))
 else
-  echo "Run tool from a year/day folder, for example: 2025/day01" >&2
+  echo "Run aocctl from a year/day folder, for example: 2025/day01" >&2
   exit 1
 fi
 

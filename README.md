@@ -34,7 +34,7 @@ advent-of-code/
 ├── ...
 ├── 2025/
 ├── scripts/
-└── tool
+└── aocctl
 ```
 
 Personal inputs and downloaded puzzle descriptions are intentionally excluded from version control.
@@ -44,11 +44,11 @@ Personal inputs and downloaded puzzle descriptions are intentionally excluded fr
 From any `YEAR/dayDD` directory (or its Rust subdirectory), the folder-aware CLI infers the correct puzzle:
 
 ```sh
-tool download
-tool run python
-tool run rust
-tool submit 1 YOUR_ANSWER
-tool submit 2 YOUR_ANSWER
+aocctl download
+aocctl run python
+aocctl run rust
+aocctl submit 1 YOUR_ANSWER
+aocctl submit 2 YOUR_ANSWER
 ```
 
 Each Python solution exposes `part_one` and `part_two`. Each Rust crate follows the same two-part shape, keeping the implementations easy to navigate and compare.
