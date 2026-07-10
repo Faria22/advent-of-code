@@ -3,6 +3,7 @@
 **/puzzle.md
 .adventofcode.session
 adventofcode.session
+LOCAL_SETUP.md
 
 # Python
 __pycache__/

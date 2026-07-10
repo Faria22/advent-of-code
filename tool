@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  cat >&2 <<'EOF'
+Usage (from a YEAR/dayDD directory):
+  tool download
+  tool run {python|rust}
+  tool submit {1|2} ANSWER
+  tool context
+EOF
+  exit 2
+}
+
+repo_root=$(git -C "$PWD" rev-parse --show-toplevel 2>/dev/null) || {
+  echo "tool must be run inside the Advent of Code repository." >&2
+  exit 1
+}
+
+relative_dir=$(realpath "$PWD" | sed "s#^$(realpath "$repo_root")/##")
+if [[ $relative_dir =~ ^(20(1[5-9]|2[0-5]))/day(0[1-9]|1[0-9]|2[0-5])(/.*)?$ ]]; then
+  year=${BASH_REMATCH[1]}
+  day=$((10#${BASH_REMATCH[3]}))
+else
+  echo "Run tool from a year/day folder, for example: 2025/day01" >&2
+  exit 1
+fi
+
+[[ $# -ge 1 ]] || usage
+command=$1
+shift
+
+case $command in
+  context)
+    [[ $# -eq 0 ]] || usage
+    printf 'Advent of Code %s, day %s\n' "$year" "$day"
+    ;;
+  download)
+    [[ $# -eq 0 ]] || usage
+    "$repo_root/scripts/download.sh" "$year" "$day"
+    ;;
+  run)
+    [[ $# -eq 1 ]] || usage
+    "$repo_root/scripts/run.sh" "$1" "$year" "$day"
+    ;;
+  submit)
+    [[ $# -eq 2 ]] || usage
+    part=$1
+    answer=$2
+    [[ $part == 1 || $part == 2 ]] || usage
+    command -v aoc >/dev/null 2>&1 || {
+      echo "aoc not found; see LOCAL_SETUP.md." >&2
+      exit 1
+    }
+    printf 'Submitting year %s, day %s, part %s, answer %s\n' "$year" "$day" "$part" "$answer"
+    aoc --year "$year" --day "$day" submit "$part" "$answer"
+    ;;
+  *)
+    usage
+    ;;
+esac

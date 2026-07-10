@@ -22,16 +22,16 @@ command -v aoc >/dev/null 2>&1 || {
 session_file=${ADVENT_OF_CODE_SESSION_FILE:-"$HOME/.adventofcode.session"}
 if [[ ! -s $session_file && -z ${ADVENT_OF_CODE_SESSION:-} ]]; then
   echo "No Advent of Code session found." >&2
-  echo "See README.md for secure login instructions." >&2
+  echo "See LOCAL_SETUP.md for secure login instructions." >&2
   exit 1
 fi
 
 repo_root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 day_dir=$(printf '%s/%s/day%02d' "$repo_root" "$year" "$day")
 
-aoc download \
-  --year "$year" \
+aoc --year "$year" \
   --day "$day" \
   --overwrite \
   --input-file "$day_dir/input.txt" \
-  --puzzle-file "$day_dir/puzzle.md"
+  --puzzle-file "$day_dir/puzzle.md" \
+  download

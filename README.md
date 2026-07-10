@@ -1,57 +1,62 @@
-# Advent of Code
+# Advent of Code — Python & Rust
 
-I will solve all [Advent of Code](https://adventofcode.com/) puzzles with Python and Rust.
+A long-term collection of my solutions to every [Advent of Code](https://adventofcode.com/) puzzle, implemented in both Python and Rust.
 
-This repository contains starter solutions for every day from 2015 through 2025. Personal puzzle inputs and downloaded puzzle descriptions are kept out of Git.
+The project is an exercise in algorithmic problem-solving, data-structure selection, performance tradeoffs, and expressing the same ideas across two languages with very different strengths.
 
-## Prerequisites
+## Project goals
 
-- Python 3
-- A recent Rust toolchain (`cargo`)
-- [`aoc-cli`](https://github.com/scarvalhojr/aoc-cli) (installed as `aoc`)
+- Complete all 275 puzzles released from 2015 through 2025.
+- Build each solution independently in Python and Rust.
+- Favor readable, well-reasoned solutions before optimizing.
+- Use the paired implementations to compare ergonomics, correctness, and performance.
 
-## Authenticate `aoc-cli`
+## Technology
 
-Advent of Code uses a browser session cookie rather than a separate CLI login:
+| Language | Focus |
+| --- | --- |
+| Python | Fast iteration, expressive solutions, and clear algorithm exploration |
+| Rust | Type-driven design, predictable performance, and memory safety |
 
-1. Sign in at <https://adventofcode.com/>.
-2. Open your browser's developer tools, select **Application** (Chrome/Edge) or **Storage** (Firefox), then open Cookies for `https://adventofcode.com`.
-3. Copy only the value of the cookie named `session`.
-4. Store it as one line in `~/.adventofcode.session` and restrict the file:
+Puzzle input management and answer submission are automated with a small repository CLI backed by [`aoc-cli`](https://github.com/scarvalhojr/aoc-cli).
 
-   ```sh
-   printf '%s' 'PASTE_SESSION_VALUE_HERE' > ~/.adventofcode.session
-   chmod 600 ~/.adventofcode.session
-   ```
+## Repository structure
 
-Never commit or share this value. To verify authentication without submitting anything, run:
-
-```sh
-aoc calendar --year 2025
+```text
+advent-of-code/
+├── 2015/
+│   ├── day01/
+│   │   ├── solution.py
+│   │   └── rust/
+│   │       ├── Cargo.toml
+│   │       └── src/main.rs
+│   └── ...
+├── ...
+├── 2025/
+├── scripts/
+└── tool
 ```
+
+Personal inputs and downloaded puzzle descriptions are intentionally excluded from version control.
 
 ## Workflow
 
-Download a day's input and puzzle description:
+From any `YEAR/dayDD` directory (or its Rust subdirectory), the folder-aware CLI infers the correct puzzle:
 
 ```sh
-./scripts/download.sh 2025 1
+tool download
+tool run python
+tool run rust
+tool submit 1 YOUR_ANSWER
+tool submit 2 YOUR_ANSWER
 ```
 
-Run either starter:
+Each Python solution exposes `part_one` and `part_two`. Each Rust crate follows the same two-part shape, keeping the implementations easy to navigate and compare.
 
-```sh
-./scripts/run.sh python 2025 1
-./scripts/run.sh rust 2025 1
-```
+## Progress
 
-Submit an answer after reviewing it carefully:
+Solutions will be committed as puzzles are completed. The year and day structure is already scaffolded so each session can stay focused on problem solving.
 
-```sh
-aoc submit --year 2025 --day 1 1 YOUR_ANSWER
-aoc submit --year 2025 --day 1 2 YOUR_ANSWER
-```
+## Acknowledgements
 
-`aoc submit` sends an answer to Advent of Code immediately, so double-check the year, day, part, and answer first.
-
-Each puzzle lives in `YEAR/dayDD/`. Python code is in `solution.py`; the Rust solution is a standalone crate in `rust/`.
+Puzzle descriptions and inputs are created by [Eric Wastl](https://was.tl/) for [Advent of Code](https://adventofcode.com/). They are not redistributed in this repository.
