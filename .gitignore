@@ -1,0 +1,22 @@
+# Personal Advent of Code data and downloaded descriptions
+**/input.txt
+**/puzzle.md
+.adventofcode.session
+adventofcode.session
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+
+# Rust
+**/target/
+**/Cargo.lock
+
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*~
