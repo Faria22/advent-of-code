@@ -1,8 +1,8 @@
 # Agent instructions
 
-## Puzzle-solving boundary
+## Puzzle-solution authorship boundary
 
-Do not solve Advent of Code puzzles for the repository owner.
+Do not write or complete Advent of Code puzzle solutions for the repository owner.
 
 - Do not write or complete puzzle solution code in Python, Rust, or any other language.
 - Do not provide full algorithms, pseudocode that directly maps to a complete solution, or final puzzle answers.
