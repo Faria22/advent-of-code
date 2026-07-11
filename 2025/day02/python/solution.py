@@ -6,7 +6,9 @@ INPUT_PATH = Path(__file__).parent.parent / 'input.txt'
 def is_invalid(number: int, count: int = -1) -> bool:
     pattern = ''
     str_number = str(number)
-    for i in str_number[:-1]:  # skips the last character
+    len_str = len(str_number)
+    # only goes up to half of the digits, since the pattern couldn't be made up by more than that
+    for i in str_number[: -len_str // 2]:
         pattern += i
         if not str_number.replace(pattern, '', count):
             return True
@@ -24,12 +26,15 @@ def part_one(data: str) -> int:
     total = 0
     for id_range in data.split(','):
         for number in parse_range(id_range):
-            if is_invalid(number, 2):
+            # numbers need to have an even number of digits since the pattern appears twice
+            if len(str(number)) % 2 != 0:
+                continue
+            if is_invalid(number, count=2):
                 total += number
     return total
 
 
-def part_two(data: str):
+def part_two(data: str) -> int:
     """Return the answer to part two."""
     total = 0
     for id_range in data.split(','):
