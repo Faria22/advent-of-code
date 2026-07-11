@@ -23,8 +23,6 @@ def move_dial_part_one(initial: int, movement: int) -> int:
     Returns the final position of the dial.
     """
 
-    movement %= MAX_DIAL_VALUE  # Get net change of position if movement would wrap around the dial
-
     final = initial + movement
 
     final %= MAX_DIAL_VALUE  # Wrap around the dial if necessary
