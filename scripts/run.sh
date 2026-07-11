@@ -18,7 +18,7 @@ repo_root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 day_dir=$(printf '%s/%s/day%02d' "$repo_root" "$year" "$day")
 
 if [[ $language == python ]]; then
-  python3 "$day_dir/solution.py"
+  python3 "$day_dir/python/solution.py"
 else
   cargo run --quiet --manifest-path "$day_dir/rust/Cargo.toml"
 fi
