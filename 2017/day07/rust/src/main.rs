@@ -17,3 +17,6 @@ fn main() {
     println!("Part 1: {:?}", part_one(input));
     println!("Part 2: {:?}", part_two(input));
 }
+
+#[cfg(test)]
+mod tests {}
