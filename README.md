@@ -24,15 +24,18 @@ Puzzle input management and answer submission are automated with a small reposit
 
 ```text
 advent-of-code/
-├── 2015/
-│   ├── day01/
-│   │   ├── solution.py
-│   │   └── rust/
-│   │       ├── Cargo.toml
-│   │       └── src/main.rs
-│   └── ...
-├── ...
-├── 2025/
+├── years/
+│   ├── 2015/
+│   │   ├── day01/
+│   │   │   ├── python/
+│   │   │   │   ├── solution.py
+│   │   │   │   └── test.py
+│   │   │   └── rust/
+│   │   │       ├── Cargo.toml
+│   │   │       └── src/main.rs
+│   │   └── ...
+│   ├── ...
+│   └── 2025/
 ├── scripts/
 └── aocctl
 ```
@@ -41,7 +44,7 @@ Personal inputs and downloaded puzzle descriptions are intentionally excluded fr
 
 ## Workflow
 
-From any `YEAR/dayDD` directory (or its Rust subdirectory), the folder-aware CLI infers the correct puzzle:
+From any `years/YEAR/dayDD` directory (or its Rust subdirectory), the folder-aware CLI infers the correct puzzle:
 
 ```sh
 aocctl download

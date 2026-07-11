@@ -27,7 +27,7 @@ if [[ ! -s $session_file && -z ${ADVENT_OF_CODE_SESSION:-} ]]; then
 fi
 
 repo_root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
-day_dir=$(printf '%s/%s/day%02d' "$repo_root" "$year" "$day")
+day_dir=$(printf '%s/years/%s/day%02d' "$repo_root" "$year" "$day")
 
 aoc --year "$year" \
   --day "$day" \

@@ -15,7 +15,7 @@ day=$3
 [[ $day =~ ^([1-9]|1[0-9]|2[0-5])$ ]] || usage
 
 repo_root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
-day_dir=$(printf '%s/%s/day%02d' "$repo_root" "$year" "$day")
+day_dir=$(printf '%s/years/%s/day%02d' "$repo_root" "$year" "$day")
 
 if [[ $language == python ]]; then
   python3 "$day_dir/python/solution.py"
