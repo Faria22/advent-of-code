@@ -1,11 +1,11 @@
 use std::{fs, path::PathBuf};
 
-fn part_one(_input: &str) -> Option<String> {
-    None
+fn part_one(_input: &str) {
+    todo!()
 }
 
-fn part_two(_input: &str) -> Option<String> {
-    None
+fn part_two(_input: &str) {
+    todo!()
 }
 
 fn main() {
