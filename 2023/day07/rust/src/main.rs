@@ -1,10 +1,10 @@
 use std::{fs, path::PathBuf};
 
-fn part_one(_input: &str) {
+fn part_one(input: &str) {
     todo!()
 }
 
-fn part_two(_input: &str) {
+fn part_two(input: &str) {
     todo!()
 }
 
