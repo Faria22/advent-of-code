@@ -14,7 +14,7 @@ def get_best_batteries(bank: list[int], n: int) -> int:
     bank_len = len(bank)
     for i in reversed(range(n)):
         highest_battery = max(bank[min_ind[-1] : bank_len - i])
-        idx_highest_battery = bank.index(highest_battery)
+        idx_highest_battery = bank.index(highest_battery, min_ind[-1])
         min_ind.append(idx_highest_battery + 1)
 
         battery += highest_battery * 10**i
@@ -38,9 +38,12 @@ def part_one(banks: list[list[int]]) -> int:
     return total
 
 
-def part_two(banks: list[list[int]]):
+def part_two(banks: list[list[int]]) -> int:
     """Return the answer to part two."""
-    return
+    total = 0
+    for bank in banks:
+        total += get_best_batteries(bank, 12)
+    return total
 
 
 def main() -> None:
