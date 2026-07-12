@@ -1,3 +1,5 @@
+# ruff: noqa: PLR2004
+
 from solution import is_invalid, parse_range
 
 
