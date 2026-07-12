@@ -1,22 +1,18 @@
-# Advent of Code — Python & Rust
+# Advent of Code — Python
 
-A long-term collection of my solutions to every [Advent of Code](https://adventofcode.com/) puzzle, implemented in both Python and Rust.
+A long-term collection of my Python solutions to every [Advent of Code](https://adventofcode.com/) puzzle.
 
-The project is an exercise in algorithmic problem-solving, data-structure selection, performance tradeoffs, and expressing the same ideas across two languages with very different strengths.
+The project is an exercise in algorithmic problem-solving, data-structure selection, performance tradeoffs, and writing clear, well-reasoned Python.
 
 ## Project goals
 
 - Complete all 275 puzzles released from 2015 through 2025.
-- Build each solution independently in Python and Rust.
+- Build each solution in Python.
 - Favor readable, well-reasoned solutions before optimizing.
-- Use the paired implementations to compare ergonomics, correctness, and performance.
 
 ## Technology
 
-| Language | Focus |
-| --- | --- |
-| Python | Fast iteration, expressive solutions, and clear algorithm exploration |
-| Rust | Type-driven design, predictable performance, and memory safety |
+Python provides fast iteration, expressive solutions, and clear algorithm exploration.
 
 Puzzle input management and answer submission are automated with a small repository CLI backed by [`aoc-cli`](https://github.com/scarvalhojr/aoc-cli).
 
@@ -27,12 +23,8 @@ advent-of-code/
 ├── years/
 │   ├── 2015/
 │   │   ├── day01/
-│   │   │   ├── python/
-│   │   │   │   ├── solution.py
-│   │   │   │   └── test.py
-│   │   │   └── rust/
-│   │   │       ├── Cargo.toml
-│   │   │       └── src/main.rs
+│   │   │   ├── solution.py
+│   │   │   └── test.py
 │   │   └── ...
 │   ├── ...
 │   └── 2025/
@@ -44,17 +36,16 @@ Personal inputs and downloaded puzzle descriptions are intentionally excluded fr
 
 ## Workflow
 
-From any `years/YEAR/dayDD` directory (or its Rust subdirectory), the folder-aware CLI infers the correct puzzle:
+From any `years/YEAR/dayDD` directory, the folder-aware CLI infers the correct puzzle:
 
 ```sh
 aocctl download
-aocctl run python
-aocctl run rust
-aocctl submit 1 YOUR_ANSWER
-aocctl submit 2 YOUR_ANSWER
+aocctl run
+aocctl submit 1
+aocctl submit 2
 ```
 
-Each Python solution exposes `part_one` and `part_two`. Each Rust crate follows the same two-part shape, keeping the implementations easy to navigate and compare.
+Each Python solution exposes `part_one` and `part_two`. The submit command runs the solution and submits the selected part's printed answer.
 
 ## Progress
 

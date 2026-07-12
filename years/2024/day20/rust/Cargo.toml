@@ -1,7 +1,0 @@
-[package]
-name = "aoc-2024-day-20"
-version = "0.1.0"
-edition = "2021"
-publish = false
-
-[dependencies]

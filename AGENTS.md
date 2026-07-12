@@ -6,7 +6,7 @@ Do not write or complete Advent of Code puzzle solutions for the repository owne
 
 - Do not write or complete puzzle solution code in Python, Rust, or any other language.
 - Do not provide full algorithms, pseudocode that directly maps to a complete solution, or final puzzle answers.
-- Do not edit a day's `solution.py` or `rust/src/main.rs` to implement a solution.
+- Do not edit a day's `solution.py` to implement a solution.
 - Do not use the submission tooling on the owner's behalf.
 
 You may:

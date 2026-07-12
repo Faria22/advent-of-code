@@ -5,8 +5,8 @@ usage() {
   cat >&2 <<'EOF'
 Usage (from a years/YEAR/dayDD directory):
   aocctl download
-  aocctl run {python|rust}
-  aocctl submit {1|2} ANSWER
+  aocctl run
+  aocctl submit {1|2}
   aocctl context
 EOF
   exit 2
@@ -40,16 +40,22 @@ case $command in
     "$repo_root/scripts/download.sh" "$year" "$day"
     ;;
   run)
-    [[ $# -eq 1 ]] || usage
-    "$repo_root/scripts/run.sh" "$1" "$year" "$day"
+    [[ $# -eq 0 ]] || usage
+    "$repo_root/scripts/run.sh" "$year" "$day"
     ;;
   submit)
-    [[ $# -eq 2 ]] || usage
+    [[ $# -eq 1 ]] || usage
     part=$1
-    answer=$2
     [[ $part == 1 || $part == 2 ]] || usage
     command -v aoc >/dev/null 2>&1 || {
       echo "aoc not found; see LOCAL_SETUP.md." >&2
+      exit 1
+    }
+    solution_output=$("$repo_root/scripts/run.sh" "$year" "$day")
+    printf '%s\n' "$solution_output"
+    answer=$(printf '%s\n' "$solution_output" | sed -n "s/^Part $part: //p" | tail -n 1)
+    [[ -n $answer ]] || {
+      echo "Could not find 'Part $part: ANSWER' in the Python solution output." >&2
       exit 1
     }
     printf 'Submitting year %s, day %s, part %s, answer %s\n' "$year" "$day" "$part" "$answer"
