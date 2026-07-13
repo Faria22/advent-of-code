@@ -26,6 +26,11 @@ else
   exit 1
 fi
 
+if [[ $year == 2025 && $day -gt 12 ]]; then
+  echo "Advent of Code 2025 only has days 1-12." >&2
+  exit 1
+fi
+
 [[ $# -ge 1 ]] || usage
 command=$1
 shift

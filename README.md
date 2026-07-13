@@ -6,7 +6,7 @@ The project is an exercise in algorithmic problem-solving, data-structure select
 
 ## Project goals
 
-- Complete all 275 puzzles released from 2015 through 2025.
+- Complete all 262 puzzles released from 2015 through 2025.
 - Build each solution in Python.
 - Favor readable, well-reasoned solutions before optimizing.
 

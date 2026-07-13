@@ -4,7 +4,7 @@ set -euo pipefail
 usage() {
   echo "Usage: $0 YEAR DAY" >&2
   echo "  YEAR: 2015-2025" >&2
-  echo "  DAY:  1-25" >&2
+  echo "  DAY:  1-25 (1-12 for 2025)" >&2
   exit 2
 }
 
@@ -13,6 +13,7 @@ year=$1
 day=$2
 [[ $year =~ ^20(1[5-9]|2[0-5])$ ]] || usage
 [[ $day =~ ^([1-9]|1[0-9]|2[0-5])$ ]] || usage
+[[ $year != 2025 || $day -le 12 ]] || usage
 
 command -v aoc >/dev/null 2>&1 || {
   echo "aoc not found; install it with: cargo install aoc-cli" >&2
