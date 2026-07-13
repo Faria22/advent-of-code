@@ -6,6 +6,7 @@ INPUT_PATH = Path(__file__).parent / 'input.txt'
 
 
 SIZE = 136
+MAX_SURROUNDING_ROLLS = 4
 
 
 def parse_input(data: str) -> np.ndarray:
@@ -45,18 +46,27 @@ def get_surrounding_rolls(grid: np.ndarray) -> np.ndarray:
 
 def part_one(grid: np.ndarray) -> np.intp:
     """Return the answer to part one."""
-    return np.sum((grid < 4) & (grid >= 0))  # ruff:ignore[magic-value-comparison]
+    grid = get_surrounding_rolls(grid)
+    return np.sum((grid < MAX_SURROUNDING_ROLLS) & (grid >= 0))
 
 
-def part_two(grid: np.ndarray) -> np.intp:
+def part_two(grid: np.ndarray) -> int:
     """Return the answer to part two."""
-    return np.sum(np.where((grid < 4) & (grid >= 0)))  # ruff:ignore[magic-value-comparison]
+    total = 0
+    removed = 1
+    while removed != 0:
+        grid = get_surrounding_rolls(grid)
+        removed = np.sum((grid < MAX_SURROUNDING_ROLLS) & (grid >= 0))
+        total += int(removed)
+
+        grid = np.where(grid < MAX_SURROUNDING_ROLLS, False, True)  # Removes rolls
+
+    return total
 
 
 def main() -> None:
     data = INPUT_PATH.read_text().rstrip('\n')
     grid = parse_input(data)
-    grid = get_surrounding_rolls(grid)
     print(f'Part 1: {part_one(grid)}')
     print(f'Part 2: {part_two(grid)}')
 
