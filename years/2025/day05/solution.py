@@ -43,7 +43,7 @@ def part_two(fresh_ids: list[tuple]) -> int:
 
         i += 1
 
-    return sum(len(range(*fresh_id)) for fresh_id in consolidaded_ids)
+    return sum(end - start for (start, end) in consolidaded_ids)
 
 
 def main() -> None:
