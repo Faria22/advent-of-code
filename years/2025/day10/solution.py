@@ -38,7 +38,7 @@ class JoltageMachine:
                 a_eq[wiring, button_idx] = 1
 
         sol = linprog(c, A_eq=a_eq, b_eq=b, integrality=1).fun
-        return int(round(sol))
+        return round(sol)
 
 
 class LightMachine:
