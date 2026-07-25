@@ -1,1 +1,1 @@
-# ruff: noqa: PLR2004
+# ruff: file-ignore[magic-value-comparison]

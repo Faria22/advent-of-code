@@ -1,4 +1,4 @@
-# ruff: noqa: PLR2004
+# ruff: file-ignore[magic-value-comparison]
 
 from solution import INITIAL_DIAL_VALUE, move_dial_part_one, move_dial_part_two
 
