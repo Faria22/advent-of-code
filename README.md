@@ -45,6 +45,14 @@ aocctl submit 1
 aocctl submit 2
 ```
 
+To let `next-day` change the current shell's directory, add the shell integration to your startup file:
+
+```sh
+eval "$(aocctl shell-init)"
+```
+
+After restarting the shell, `next-day` moves to the following puzzle directory, continuing at day 1 of the next year when necessary.
+
 Each Python solution exposes `part_one` and `part_two`. The submit command runs the solution and submits the selected part's printed answer.
 
 ## Progress

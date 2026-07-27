@@ -8,9 +8,33 @@ Usage (from a years/YEAR/dayDD directory):
   aocctl run
   aocctl submit {1|2}
   aocctl context
+
+Shell setup:
+  eval "$(aocctl shell-init)"
 EOF
   exit 2
 }
+
+[[ $# -ge 1 ]] || usage
+command=$1
+shift
+
+if [[ $command == shell-init ]]; then
+  [[ $# -eq 0 ]] || usage
+  cat <<'EOF'
+next-day() {
+  if [[ $# -ne 0 ]]; then
+    echo "Usage: next-day" >&2
+    return 2
+  fi
+
+  local next_dir
+  next_dir=$(command aocctl next-day-path) || return
+  builtin cd -- "$next_dir"
+}
+EOF
+  exit
+fi
 
 repo_root=$(git -C "$PWD" rev-parse --show-toplevel 2>/dev/null) || {
   echo "aocctl must be run inside the Advent of Code repository." >&2
@@ -31,11 +55,21 @@ if [[ $year == 2025 && $day -gt 12 ]]; then
   exit 1
 fi
 
-[[ $# -ge 1 ]] || usage
-command=$1
-shift
-
 case $command in
+  next-day-path)
+    [[ $# -eq 0 ]] || usage
+    next_day=$((day + 1))
+    next_dir=$(printf '%s/years/%s/day%02d' "$repo_root" "$year" "$next_day")
+    if [[ ! -d $next_dir ]]; then
+      next_year=$((year + 1))
+      next_dir=$(printf '%s/years/%s/day01' "$repo_root" "$next_year")
+    fi
+    if [[ ! -d $next_dir ]]; then
+      echo "There is no day after Advent of Code $year, day $day in this repository." >&2
+      exit 1
+    fi
+    printf '%s\n' "$next_dir"
+    ;;
   context)
     [[ $# -eq 0 ]] || usage
     printf 'Advent of Code %s, day %s\n' "$year" "$day"
