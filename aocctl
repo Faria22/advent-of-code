@@ -7,6 +7,7 @@ Usage (from a years/YEAR/dayDD directory):
   aocctl download
   aocctl run
   aocctl submit {1|2}
+  aocctl commit
   aocctl context
 
 Shell setup:
@@ -45,6 +46,7 @@ relative_dir=$(realpath "$PWD" | sed "s#^$(realpath "$repo_root")/##")
 if [[ $relative_dir =~ ^years/(20(1[5-9]|2[0-5]))/day(0[1-9]|1[0-9]|2[0-5])(/.*)?$ ]]; then
   year=${BASH_REMATCH[1]}
   day=$((10#${BASH_REMATCH[3]}))
+  day_dir=$(printf 'years/%s/day%02d' "$year" "$day")
 else
   echo "Run aocctl from a year/day folder, for example: years/2025/day01" >&2
   exit 1
@@ -81,6 +83,39 @@ case $command in
   run)
     [[ $# -eq 0 ]] || usage
     "$repo_root/scripts/run.sh" "$year" "$day"
+    ;;
+  commit)
+    [[ $# -eq 0 ]] || usage
+    branch=$(git -C "$repo_root" symbolic-ref --quiet --short HEAD) || {
+      echo "Cannot commit and push from a detached HEAD." >&2
+      exit 1
+    }
+    upstream=$(git -C "$repo_root" rev-parse --abbrev-ref --symbolic-full-name '@{upstream}' 2>/dev/null) || {
+      echo "Branch '$branch' does not have an upstream branch." >&2
+      echo "Set its upstream before running 'aocctl commit'." >&2
+      exit 1
+    }
+    unpublished_count=$(git -C "$repo_root" rev-list --count "$upstream..HEAD")
+    if [[ $unpublished_count -ne 0 ]]; then
+      echo "Branch '$branch' already has $unpublished_count unpublished commit(s)." >&2
+      echo "Push or otherwise resolve them before running 'aocctl commit'." >&2
+      exit 1
+    fi
+    while IFS= read -r -d '' staged_path; do
+      if [[ $staged_path != "$day_dir" && $staged_path != "$day_dir/"* ]]; then
+        echo "Already-staged changes exist outside $day_dir: $staged_path" >&2
+        echo "Commit or unstage them before running 'aocctl commit'." >&2
+        exit 1
+      fi
+    done < <(git -C "$repo_root" diff --cached --name-only -z)
+    git -C "$repo_root" add -- "$day_dir"
+    if git -C "$repo_root" diff --cached --quiet -- "$day_dir"; then
+      echo "There are no changes to commit in $day_dir." >&2
+      exit 1
+    fi
+    git -C "$repo_root" commit -m "solution $year day $day"
+    git -C "$repo_root" push
+    printf 'Pushed solution %s day %s from branch %s.\n' "$year" "$day" "$branch"
     ;;
   submit)
     [[ $# -eq 1 ]] || usage

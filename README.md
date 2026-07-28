@@ -43,7 +43,13 @@ aocctl download
 aocctl run
 aocctl submit 1
 aocctl submit 2
+aocctl commit
 ```
+
+`aocctl commit` stages every change in the current day folder, commits it as
+`solution YEAR day DAY`, and pushes the current branch. It stops before staging
+anything if changes from another folder are already staged or if the branch
+already has unpublished commits.
 
 To let `next-day` change the current shell's directory, add the shell integration to your startup file:
 
