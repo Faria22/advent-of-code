@@ -1,3 +1,4 @@
+# ruff: file-ignore[magic-value-comparison]  # ruff: ignore[unused-noqa]
 from pathlib import Path
 
 from solution import part_one, part_two

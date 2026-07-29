@@ -1,4 +1,4 @@
-# ruff: file-ignore[magic-value-comparison]
+# ruff: file-ignore[magic-value-comparison]  # ruff: ignore[unused-noqa]
 
 from solution import is_invalid, parse_range
 

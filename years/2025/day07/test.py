@@ -1,4 +1,4 @@
-# ruff: file-ignore[magic-value-comparison]
+# ruff: file-ignore[magic-value-comparison]  # ruff: ignore[unused-noqa]
 from pathlib import Path
 
 from solution import parse_data, part_one, part_two

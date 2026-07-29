@@ -1,4 +1,4 @@
-# ruff: file-ignore[magic-value-comparison]
+# ruff: file-ignore[magic-value-comparison]  # ruff: ignore[unused-noqa]
 
 from solution import INITIAL_DIAL_VALUE, move_dial_part_one, move_dial_part_two
 
