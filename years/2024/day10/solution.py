@@ -6,13 +6,6 @@ from aoc import Grid, Pos
 INPUT_PATH = Path(__file__).parent / 'input.txt'
 
 
-DIRECTIONS = {
-    Pos(-1, 0),  # Up
-    Pos(1, 0),  # Down
-    Pos(0, -1),  # Left
-    Pos(0, 1),  # Right
-}
-
 START_VALUE = 0
 END_VALUE = 9
 
@@ -25,8 +18,7 @@ def parse_data(input_path: Path) -> Grid[int]:
 @cache
 def walk_up(grid: Grid[int], pos: Pos, value: int) -> set[Pos]:
     found_ends: set[Pos] = set()  # All then ends that the current position found
-    for direction in DIRECTIONS:
-        new_pos = pos + direction
+    for new_pos in pos.neighbors():
         if not grid.in_bounds(new_pos):
             continue
 
@@ -47,8 +39,7 @@ def walk_up(grid: Grid[int], pos: Pos, value: int) -> set[Pos]:
 @cache
 def walk_up_count(grid: Grid[int], pos: Pos, value: int) -> int:
     count = 0
-    for direction in DIRECTIONS:
-        new_pos = pos + direction
+    for new_pos in pos.neighbors():
         if not grid.in_bounds(new_pos):
             continue
 

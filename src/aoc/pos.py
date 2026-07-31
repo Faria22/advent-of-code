@@ -1,3 +1,4 @@
+from collections.abc import Iterator
 from typing import NamedTuple, Self
 
 
@@ -40,3 +41,9 @@ class Pos(NamedTuple):
         for _ in range(n):
             new = new.shift(0, 1)
         return new
+
+    def neighbors(self) -> Iterator[Self]:
+        yield self.shift_up()
+        yield self.shift_down()
+        yield self.shift_left()
+        yield self.shift_right()
