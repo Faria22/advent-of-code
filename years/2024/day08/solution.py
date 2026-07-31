@@ -1,19 +1,12 @@
 from collections import defaultdict
 from itertools import combinations
 from pathlib import Path
-from typing import NamedTuple
+
+from advent_of_code import Pos
 
 INPUT_PATH = Path(__file__).parent / 'input.txt'
 
 EMPTY = '.'
-
-
-class Pos(NamedTuple):
-    row: int
-    col: int
-
-    def __str__(self) -> str:
-        return f'({self.row},{self.col})'
 
 
 def parse_data(input_path: Path) -> tuple[dict[str, set[Pos]], Pos]:

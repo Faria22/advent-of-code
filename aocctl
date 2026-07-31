@@ -6,6 +6,7 @@ usage() {
 Usage (from a years/YEAR/dayDD directory):
   aocctl download
   aocctl run
+  aocctl test
   aocctl submit {1|2}
   aocctl commit
   aocctl context
@@ -83,6 +84,10 @@ case $command in
   run)
     [[ $# -eq 0 ]] || usage
     "$repo_root/scripts/run.sh" "$year" "$day"
+    ;;
+  test)
+    [[ $# -eq 0 ]] || usage
+    "$repo_root/scripts/test.sh" "$year" "$day"
     ;;
   commit)
     [[ $# -eq 0 ]] || usage

@@ -1,23 +1,9 @@
-from collections.abc import Iterator
 from functools import cache
 from pathlib import Path
-from typing import NamedTuple
+
+from advent_of_code import Grid, Pos
 
 INPUT_PATH = Path(__file__).parent / 'input.txt'
-
-
-class Pos(NamedTuple):
-    row: int
-    col: int
-
-    def __add__(self, other: 'Pos') -> 'Pos':
-        return Pos(self.row + other.row, self.col + other.col)
-
-    def __str__(self) -> str:
-        return f'({self.row}, {self.col})'
-
-    def __repr__(self) -> str:
-        return f'({self.row}, {self.col})'
 
 
 DIRECTIONS = {
@@ -31,33 +17,17 @@ START_VALUE = 0
 END_VALUE = 9
 
 
-class Grid:
-    def __init__(self, lines: list[str]) -> None:
-        self.data = [[int(x) for x in line] for line in lines]
-        self.shape = (len(self.data), len(self.data[0]))
-
-    def __getitem__(self, pos: Pos) -> int:
-        return self.data[pos.row][pos.col]
-
-    def __iter__(self) -> Iterator:
-        yield from self.data
-
-
-def parse_data(input_path: Path) -> Grid:
-    return Grid(input_path.read_text().strip().split('\n'))
+def parse_data(input_path: Path) -> Grid[int]:
+    lines = input_path.read_text().strip().splitlines()
+    return Grid([[int(cell) for cell in line] for line in lines])
 
 
 @cache
-def in_bounds(pos: Pos, grid: Grid) -> bool:
-    return all(0 <= pos[i] < grid.shape[i] for i in range(2))
-
-
-@cache
-def walk_up(grid: Grid, pos: Pos, value: int) -> set[Pos]:
+def walk_up(grid: Grid[int], pos: Pos, value: int) -> set[Pos]:
     found_ends: set[Pos] = set()  # All then ends that the current position found
     for direction in DIRECTIONS:
         new_pos = pos + direction
-        if not in_bounds(new_pos, grid):
+        if not grid.in_bounds(new_pos):
             continue
 
         new_pos_value = grid[new_pos]
@@ -75,11 +45,11 @@ def walk_up(grid: Grid, pos: Pos, value: int) -> set[Pos]:
 
 
 @cache
-def walk_up_count(grid: Grid, pos: Pos, value: int) -> int:
+def walk_up_count(grid: Grid[int], pos: Pos, value: int) -> int:
     count = 0
     for direction in DIRECTIONS:
         new_pos = pos + direction
-        if not in_bounds(new_pos, grid):
+        if not grid.in_bounds(new_pos):
             continue
 
         new_pos_value = grid[new_pos]

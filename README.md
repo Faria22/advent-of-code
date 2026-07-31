@@ -12,7 +12,8 @@ The project is an exercise in algorithmic problem-solving, data-structure select
 
 ## Technology
 
-Python provides fast iteration, expressive solutions, and clear algorithm exploration.
+Python provides fast iteration, expressive solutions, and clear algorithm exploration. [`uv`](https://docs.astral.sh/uv/)
+manages the repository's Python version, shared dependencies, and virtual environment.
 
 Puzzle input management and answer submission are automated with a small repository CLI backed by [`aoc-cli`](https://github.com/scarvalhojr/aoc-cli).
 
@@ -41,10 +42,14 @@ From any `years/YEAR/dayDD` directory, the folder-aware CLI infers the correct p
 ```sh
 aocctl download
 aocctl run
+aocctl test
 aocctl submit 1
 aocctl submit 2
 aocctl commit
 ```
+
+`aocctl run`, `aocctl test`, and `aocctl submit` automatically use the locked
+root uv project.
 
 `aocctl commit` stages every change in the current day folder, commits it as
 `solution YEAR day DAY`, and pushes the current branch. It stops before staging

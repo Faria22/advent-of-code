@@ -1,0 +1,22 @@
+[project]
+name = "advent-of-code"
+version = "0.1.0"
+description = "Shared utilities and solutions for Advent of Code"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy",
+    "scipy",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+]
+
+[tool.uv.workspace]
+members = []
+
+[build-system]
+requires = ["uv_build>=0.11.28,<0.12"]
+build-backend = "uv_build"

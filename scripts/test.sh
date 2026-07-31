@@ -15,10 +15,17 @@ day=$2
 
 repo_root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 day_dir=$(printf '%s/years/%s/day%02d' "$repo_root" "$year" "$day")
+test_path="$day_dir/test.py"
 
 command -v uv >/dev/null 2>&1 || {
-  echo "uv not found; install it before running Advent of Code solutions." >&2
+  echo "uv not found; install it before running Advent of Code tests." >&2
   exit 1
 }
 
-uv run --project "$repo_root" --locked python "$day_dir/solution.py"
+[[ -f $test_path ]] || {
+  echo "Test file not found: $test_path" >&2
+  exit 1
+}
+
+cd "$day_dir"
+uv run --project "$repo_root" --locked pytest test.py -q
