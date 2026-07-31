@@ -7,7 +7,7 @@ Usage (from a years/YEAR/dayDD directory):
   aocctl download
   aocctl run
   aocctl test
-  aocctl submit {1|2}
+  aocctl submit
   aocctl commit
   aocctl context
 
@@ -123,13 +123,25 @@ case $command in
     printf 'Pushed solution %s day %s from branch %s.\n' "$year" "$day" "$branch"
     ;;
   submit)
-    [[ $# -eq 1 ]] || usage
-    part=$1
-    [[ $part == 1 || $part == 2 ]] || usage
+    [[ $# -eq 0 ]] || usage
     command -v aoc >/dev/null 2>&1 || {
       echo "aoc not found; see LOCAL_SETUP.md." >&2
       exit 1
     }
+    puzzle_path="$repo_root/$day_dir/puzzle.md"
+    [[ -f $puzzle_path ]] || {
+      echo "Puzzle file not found: $puzzle_path" >&2
+      echo "Run 'aocctl download' before submitting." >&2
+      exit 1
+    }
+    if grep -Fq -- 'Both parts of this puzzle are complete!' "$puzzle_path"; then
+      echo "Both parts of Advent of Code $year, day $day are already complete." >&2
+      exit 1
+    elif grep -Fq -- '--- Part Two ---' "$puzzle_path"; then
+      part=2
+    else
+      part=1
+    fi
     solution_output=$("$repo_root/scripts/run.sh" "$year" "$day")
     printf '%s\n' "$solution_output"
     answer=$(printf '%s\n' "$solution_output" | sed -n "s/^Part $part: //p" | tail -n 1)
@@ -145,8 +157,8 @@ case $command in
       printf '%s\n' "$submission_output" >&2
       exit "$status"
     fi
-    if [[ $part == 1 && $submission_output == *"That's the right answer"* ]]; then
-      printf 'Refreshing puzzle for part 2...\n'
+    if [[ $submission_output == *"That's the right answer"* ]]; then
+      printf 'Refreshing puzzle...\n'
       "$repo_root/scripts/download.sh" "$year" "$day"
     fi
     ;;

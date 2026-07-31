@@ -43,13 +43,13 @@ From any `years/YEAR/dayDD` directory, the folder-aware CLI infers the correct p
 aocctl download
 aocctl run
 aocctl test
-aocctl submit 1
-aocctl submit 2
+aocctl submit
 aocctl commit
 ```
 
 `aocctl run`, `aocctl test`, and `aocctl submit` automatically use the locked
-root uv project.
+root uv project. The submit command infers the active part from the downloaded
+puzzle and refreshes it after a correct answer.
 
 `aocctl commit` stages every change in the current day folder, commits it as
 `solution YEAR day DAY`, and pushes the current branch. It stops before staging
@@ -64,7 +64,8 @@ eval "$(aocctl shell-init)"
 
 After restarting the shell, `next-day` moves to the following puzzle directory, continuing at day 1 of the next year when necessary.
 
-Each Python solution exposes `part_one` and `part_two`. The submit command runs the solution and submits the selected part's printed answer.
+Each Python solution exposes `part_one` and `part_two`. The submit command runs
+the solution and submits the active part's printed answer.
 
 ## Progress
 
