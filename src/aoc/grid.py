@@ -1,7 +1,7 @@
 from collections.abc import Iterator
 from typing import overload
 
-from advent_of_code.pos import Pos
+from aoc.pos import Pos
 
 
 class Grid[T]:

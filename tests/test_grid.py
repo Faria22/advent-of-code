@@ -1,4 +1,4 @@
-from advent_of_code import Grid, Pos
+from aoc import Grid, Pos
 
 
 def test_grid_supports_generic_cell_values() -> None:

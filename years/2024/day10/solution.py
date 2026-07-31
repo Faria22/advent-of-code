@@ -1,7 +1,7 @@
 from functools import cache
 from pathlib import Path
 
-from advent_of_code import Grid, Pos
+from aoc import Grid, Pos
 
 INPUT_PATH = Path(__file__).parent / 'input.txt'
 

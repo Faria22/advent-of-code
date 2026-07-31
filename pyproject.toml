@@ -1,5 +1,5 @@
 [project]
-name = "advent-of-code"
+name = "aoc"
 version = "0.1.0"
 description = "Shared utilities and solutions for Advent of Code"
 readme = "README.md"
