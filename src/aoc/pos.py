@@ -19,28 +19,16 @@ class Pos(NamedTuple):
         return type(self)(self.row + row_shift, self.col + col_shift)
 
     def shift_up(self, n: int = 1) -> Self:
-        new = self
-        for _ in range(n):
-            new = new.shift(-1, 0)
-        return new
+        return self.shift(-n, 0)
 
     def shift_down(self, n: int = 1) -> Self:
-        new = self
-        for _ in range(n):
-            new = new.shift(1, 0)
-        return new
+        return self.shift(n, 0)
 
     def shift_left(self, n: int = 1) -> Self:
-        new = self
-        for _ in range(n):
-            new = new.shift(0, -1)
-        return new
+        return self.shift(0, -n)
 
     def shift_right(self, n: int = 1) -> Self:
-        new = self
-        for _ in range(n):
-            new = new.shift(0, 1)
-        return new
+        return self.shift(0, n)
 
     def neighbors(self) -> Iterator[Self]:
         yield self.shift_up()
