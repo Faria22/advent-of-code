@@ -3,8 +3,8 @@ from pathlib import Path
 INPUT_PATH = Path(__file__).parent / 'input.txt'
 
 
-def parse_data(input_path: Path) -> str:
-    return input_path.read_text().strip()
+def parse_data(input_path: Path) -> list[str]:
+    return input_path.read_text().strip().split('\n')
 
 
 def part_one(input_path: Path) -> int:
