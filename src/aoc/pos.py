@@ -6,8 +6,14 @@ class Pos(NamedTuple):
     row: int
     col: int
 
-    def __add__(self, other: 'Pos') -> 'Pos':
+    def __add__(self, other: 'Pos') -> Self:
         return type(self)(self.row + other.row, self.col + other.col)
+
+    def __sub__(self, other: 'Pos') -> Self:
+        return type(self)(self.row - other.row, self.col - other.col)
+
+    def __mul__(self, n: int) -> Self:
+        return type(self)(self.row * n, self.col * n)
 
     def __str__(self) -> str:
         return f'({self.row}, {self.col})'
