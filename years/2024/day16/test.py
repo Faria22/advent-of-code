@@ -1,14 +1,22 @@
-# ruff: file-ignore[magic-value-comparison]  # ruff: ignore[unused-noqa]
+# ruff: file-ignore[magic-value-comparison]
 from pathlib import Path
 
 from solution import part_one, part_two
 
-SAMPLE_PATH = Path(__file__).parent / 'sample_input.txt'
+DIR = Path(__file__).parent
 
 
-def test_part_one_with_sample_input() -> None:
-    assert part_one(SAMPLE_PATH) == 0
+def test_part_one_with_sample_input1() -> None:
+    assert part_one(DIR / 'sample_input1.txt') == 7036
 
 
-def test_part_two_with_sample_input() -> None:
-    assert part_two(SAMPLE_PATH) == 0
+def test_part_one_with_sample_input2() -> None:
+    assert part_one(DIR / 'sample_input2.txt') == 11048
+
+
+def test_part_two_with_sample_input1() -> None:
+    assert part_two(DIR / 'sample_input1.txt') == 45
+
+
+def test_part_two_with_sample_input2() -> None:
+    assert part_two(DIR / 'sample_input2.txt') == 64
