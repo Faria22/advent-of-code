@@ -94,9 +94,6 @@ def part_one(input_path: Path) -> str:
     return computer.run_program()
 
 
-def test(start) -> int: ...
-
-
 def part_two(input_path: Path) -> int:
     """Return the answer to part two."""
     computer = parse_data(input_path)
