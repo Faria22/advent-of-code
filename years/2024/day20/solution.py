@@ -35,33 +35,35 @@ def get_neighbors_with_n_moves(pos: Pos, n: int) -> set[Pos]:
     return neighbors
 
 
-def distance(start: Pos, end: Pos) -> int:
-    return abs(start.row - end.row) + abs(start.col - end.col)
-
-
 def find_shortcuts(
-    path: dict[Pos, int],
+    path: list[Pos],
     min_shortcut: int,
     max_dist: int,
 ) -> int:
-    cheats: list[tuple[Pos, Pos]] = []
-    for start_cheat, start_time in path.items():
-        for end_cheat, end_time in path.items():
-            if start_cheat == end_cheat:
+    cheats = 0
+    times = {pos: time for time, pos in enumerate(path)}
+    offsets = tuple(
+        (row_shift, col_shift, abs(row_shift) + abs(col_shift))
+        for row_shift in range(-max_dist, max_dist + 1)
+        for col_shift in range(-(max_dist - abs(row_shift)), max_dist - abs(row_shift) + 1)
+        if row_shift or col_shift  # to skip 0,0
+    )
+    for start_cheat, start_time in times.items():
+        for row_shift, col_shift, distance in offsets:
+            end_cheat = start_cheat.shift(row_shift, col_shift)
+
+            end_time = times.get(end_cheat)
+            if end_time is None:
                 continue
 
-            d = distance(start_cheat, end_cheat)
-            if d > max_dist:
-                continue
-
-            time_save = end_time - (start_time + d)
+            time_save = end_time - (start_time + distance)
             if time_save >= min_shortcut:
-                cheats.append((start_cheat, end_cheat))
-    return len(cheats)
+                cheats += 1
+    return cheats
 
 
-def get_path(start: Pos, end: Pos, walls: set[Pos]) -> dict[Pos, int]:
-    path = {start: 0}
+def get_path(start: Pos, end: Pos, walls: set[Pos]) -> list[Pos]:
+    path = [start]
     current = start
 
     while current != end:
@@ -71,7 +73,7 @@ def get_path(start: Pos, end: Pos, walls: set[Pos]) -> dict[Pos, int]:
         assert len(next_positions) == 1
 
         current = next_positions[0]
-        path[current] = len(path)
+        path.append(current)
 
     return path
 
@@ -80,7 +82,7 @@ def part_one(input_path: Path, min_shortcut: int = 100) -> int:
     """Return the answer to part one."""
     start, end, walls = parse_data(input_path)
 
-    path: dict[Pos, int] = get_path(start, end, walls)
+    path = get_path(start, end, walls)
     return find_shortcuts(path, min_shortcut, 2)
 
 
@@ -88,7 +90,7 @@ def part_two(input_path: Path, min_shortcut: int = 100) -> int:
     """Return the answer to part two."""
     start, end, walls = parse_data(input_path)
 
-    path: dict[Pos, int] = get_path(start, end, walls)
+    path = get_path(start, end, walls)
     return find_shortcuts(path, min_shortcut, 20)
 
 
