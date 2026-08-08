@@ -3,19 +3,31 @@ from pathlib import Path
 INPUT_PATH = Path(__file__).parent / 'input.txt'
 
 
-def parse_data(input_path: Path) -> list[str]:
-    return input_path.read_text().strip().split('\n')
+def parse_data(input_path: Path) -> str:
+    return input_path.read_text().strip()
 
 
 def part_one(input_path: Path) -> int:
     """Return the answer to part one."""
-    data = parse_data(input_path)  # ruff: ignore[unused-variable]
-    return 0
+    data = parse_data(input_path)
+    up = data.count('(')
+    down = data.count(')')
+    return up - down
 
 
 def part_two(input_path: Path) -> int:
     """Return the answer to part two."""
-    data = parse_data(input_path)  # ruff: ignore[unused-variable]
+    data = parse_data(input_path)
+    cur_pos = 0
+    for idx, char in enumerate(data, 1):
+        if char == '(':
+            cur_pos += 1
+        else:
+            cur_pos -= 1
+
+        if cur_pos < 0:
+            return idx
+
     return 0
 
 
