@@ -41,3 +41,16 @@ class Pos(NamedTuple):
         yield self.shift_down()
         yield self.shift_left()
         yield self.shift_right()
+
+    def move(self, move: str) -> Self:
+        match move:
+            case '^':
+                return self.shift_up()
+            case 'v':
+                return self.shift_down()
+            case '>':
+                return self.shift_right()
+            case '<':
+                return self.shift_left()
+            case _:
+                raise ValueError
