@@ -1,22 +1,29 @@
+import hashlib
 from pathlib import Path
 
 INPUT_PATH = Path(__file__).parent / 'input.txt'
 
 
-def parse_data(input_path: Path) -> list[str]:
-    return input_path.read_text().strip().split('\n')
+def parse_data(input_path: Path) -> str:
+    return input_path.read_text().strip()
 
 
 def part_one(input_path: Path) -> int:
     """Return the answer to part one."""
-    data = parse_data(input_path)  # ruff: ignore[unused-variable]
-    return 0
+    key = parse_data(input_path)
+    num = 1
+    while not hashlib.md5((key + str(num)).encode()).hexdigest().startswith('00000'):
+        num += 1
+    return num
 
 
 def part_two(input_path: Path) -> int:
     """Return the answer to part two."""
-    data = parse_data(input_path)  # ruff: ignore[unused-variable]
-    return 0
+    key = parse_data(input_path)
+    num = 1
+    while not hashlib.md5((key + str(num)).encode()).hexdigest().startswith('000000'):
+        num += 1
+    return num
 
 
 def main() -> None:
