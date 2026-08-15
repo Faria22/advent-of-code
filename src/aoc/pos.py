@@ -36,11 +36,17 @@ class Pos(NamedTuple):
     def shift_right(self, n: int = 1) -> Self:
         return self.shift(0, n)
 
-    def neighbors(self) -> Iterator[Self]:
+    def neighbors(self, diagonals: bool = False) -> Iterator[Self]:
         yield self.shift_up()
         yield self.shift_down()
         yield self.shift_left()
         yield self.shift_right()
+
+        if diagonals:
+            yield self.shift(-1, -1)
+            yield self.shift(-1, 1)
+            yield self.shift(1, -1)
+            yield self.shift(1, 1)
 
     def move(self, move: str) -> Self:
         match move:
