@@ -10,14 +10,19 @@ class Grid[T]:
         self.shape = (len(self._grid), len(self._grid[0]))
 
     @overload
-    def __getitem__(self, key: Pos) -> T: ...
+    def __getitem__(self, key: Pos) -> T | None: ...
 
     @overload
     def __getitem__(self, key: int) -> list[T]: ...
 
-    def __getitem__(self, key: Pos | int) -> T | list[T]:
+    def __getitem__(self, key: Pos | int) -> T | list[T] | None:
         if isinstance(key, int):
+            if not (0 <= key < self.shape[0]):
+                return None
             return self._grid[key]
+
+        if not self.in_bounds(key):
+            return None
 
         return self._grid[key.row][key.col]
 
