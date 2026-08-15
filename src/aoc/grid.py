@@ -33,6 +33,26 @@ class Grid[T]:
 
         return self._grid[key.row][key.col]
 
+    @overload
+    def __setitem__(self, key: Pos, value: T) -> None: ...
+
+    @overload
+    def __setitem__(self, key: int, value: list[T]) -> None: ...
+
+    def __setitem__(self, key: Pos | int, value: T | list[T]) -> None:
+        if isinstance(key, int):
+            if not (0 <= key < self.shape[0]):
+                raise IndexError('grid row index out of range')
+            if not isinstance(value, list) or len(value) != self.shape[1]:
+                raise ValueError('replacement row must match the grid width')
+            self._grid[key] = value
+            return
+
+        if not self.in_bounds(key):
+            raise IndexError('grid position out of range')
+
+        self._grid[key.row][key.col] = value
+
     def __iter__(self) -> Iterator[list[T]]:
         yield from self._grid
 

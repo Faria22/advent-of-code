@@ -13,6 +13,22 @@ def test_grid_can_return_a_row() -> None:
     assert grid[1] == ['c', 'd']
 
 
+def test_grid_can_replace_a_cell() -> None:
+    grid = Grid([['a', 'b'], ['c', 'd']])
+
+    grid[Pos(1, 0)] = 'x'
+
+    assert grid[Pos(1, 0)] == 'x'
+
+
+def test_grid_can_replace_a_row() -> None:
+    grid = Grid([['a', 'b'], ['c', 'd']])
+
+    grid[1] = ['x', 'y']
+
+    assert grid[1] == ['x', 'y']
+
+
 def test_grid_identifies_positions_in_bounds() -> None:
     grid = Grid([['a', 'b'], ['c', 'd']])
 
