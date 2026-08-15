@@ -1,22 +1,36 @@
+from itertools import combinations
 from pathlib import Path
 
 INPUT_PATH = Path(__file__).parent / 'input.txt'
 
 
-def parse_data(input_path: Path) -> list[str]:
-    return input_path.read_text().strip().split('\n')
+def parse_data(input_path: Path) -> list[int]:
+    buckets = input_path.read_text().strip().split('\n')
+    return [int(bucket) for bucket in buckets]
 
 
-def part_one(input_path: Path) -> int:
+def part_one(input_path: Path, liters: int = 150) -> int:
     """Return the answer to part one."""
-    data = parse_data(input_path)  # ruff: ignore[unused-variable]
-    return 0
+    buckets = parse_data(input_path)
+    num_combinations = 0
+    for num_used_buckets in range(2, len(buckets) + 1):
+        for combination in combinations(buckets, num_used_buckets):
+            if sum(combination) == liters:
+                num_combinations += 1
+    return num_combinations
 
 
-def part_two(input_path: Path) -> int:
+def part_two(input_path: Path, liters: int = 150) -> int:
     """Return the answer to part two."""
-    data = parse_data(input_path)  # ruff: ignore[unused-variable]
-    return 0
+    buckets = parse_data(input_path)
+    num_combinations = 0
+    for num_used_buckets in range(2, len(buckets) + 1):
+        for combination in combinations(buckets, num_used_buckets):
+            if sum(combination) == liters:
+                num_combinations += 1
+        if num_combinations > 0:
+            return num_combinations
+    return -1
 
 
 def main() -> None:
