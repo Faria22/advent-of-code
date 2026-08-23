@@ -68,8 +68,8 @@ def parse_data(input_path: Path) -> Robots:
             robot_values[int(parts[-1])].append(int(parts[1]))
         else:
             idx = int(parts[1])
-            low_receiver = Receiver(parts[5], int(parts[6]))  # pyright: ignore[reportArgumentType]
-            high_receiver = Receiver(parts[-2], int(parts[-1]))  # pyright: ignore[reportArgumentType]
+            low_receiver = Receiver(parts[5], int(parts[6]))  # ty: ignore[invalid-argument-type]
+            high_receiver = Receiver(parts[-2], int(parts[-1]))  # ty: ignore[invalid-argument-type]
             robots.append(Robot(idx, [], (low_receiver, high_receiver)))
 
     robots = Robots(robots)

@@ -51,7 +51,7 @@ class Grid[T]:
         if not self.in_bounds(key):
             raise IndexError('grid position out of range')
 
-        self._grid[key.row][key.col] = value  # pyright: ignore[reportCallIssue, reportArgumentType]
+        self._grid[key.row][key.col] = value  # ty: ignore[invalid-assignment]
 
     def __iter__(self) -> Iterator[list[T]]:
         yield from self._grid

@@ -120,7 +120,7 @@ class Guard:
                 state = (obstacle, self.direction)
                 if state in found_states:
                     return True
-                found_states.add(state)  # pyright: ignore[reportArgumentType]
+                found_states.add(state)
 
         return False
 
