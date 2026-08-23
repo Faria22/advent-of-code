@@ -52,7 +52,7 @@ def get_antinodes(a: Pos, b: Pos, max_pos: Pos | None = None, /, all_nodes: bool
 
 
 def in_bounds(node: Pos, max_pos: Pos) -> bool:
-    return all(0 <= node[i] <= max_pos[i] for i in range(2))
+    return 0 <= node.row <= max_pos.row and 0 <= node.col <= max_pos.col
 
 
 def part_one(input_path: Path) -> int:

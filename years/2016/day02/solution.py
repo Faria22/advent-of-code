@@ -25,10 +25,10 @@ class NumPad(Grid):
             self._cur_button_pos = next_button_pos
 
     def get_current_button(self) -> str:
-        return self._grid[self._cur_button_pos[0]][self._cur_button_pos[1]]
+        return self._grid[self._cur_button_pos.row][self._cur_button_pos.col]
 
     def in_bounds(self, pos: Pos) -> bool:
-        return super().in_bounds(pos) and self._grid[pos[0]][pos[1]]
+        return super().in_bounds(pos) and self._grid[pos.row][pos.col]
 
 
 def parse_data(input_path: Path) -> list[str]:

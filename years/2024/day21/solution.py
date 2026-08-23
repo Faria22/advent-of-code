@@ -34,7 +34,9 @@ class BasePad:
 
         end_button_pos = self.buttons[button]
 
-        vertical_shift, horizontal_shift = end_button_pos - self.cur_pos
+        shift = end_button_pos - self.cur_pos
+        vertical_shift = shift.row
+        horizontal_shift = shift.col
 
         vertical_shift_str = '^' if vertical_shift < 0 else 'v'
         horizontal_shift_str = '<' if horizontal_shift < 0 else '>'

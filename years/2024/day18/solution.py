@@ -19,7 +19,7 @@ def parse_data(input_path: Path) -> list[Pos]:
 
 
 def in_bounds(pos: Pos, side_len: int) -> bool:
-    return all(0 <= pos[i] <= side_len for i in range(2))
+    return 0 <= pos.row <= side_len and 0 <= pos.col <= side_len
 
 
 def walk_maze(

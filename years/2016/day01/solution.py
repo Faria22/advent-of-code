@@ -40,7 +40,7 @@ def part_one(input_path: Path) -> int:
             case 'w':
                 pos = pos.shift_left(num)
 
-    return sum(abs(p) for p in pos)
+    return abs(pos.row) + abs(pos.col)
 
 
 def part_two(input_path: Path) -> int:
@@ -68,7 +68,7 @@ def part_two(input_path: Path) -> int:
 
         for v_pos in visited:
             if v_pos in seen:
-                return sum(abs(p) for p in v_pos)
+                return abs(v_pos.row) + abs(v_pos.col)
 
         seen.update(visited)
     return 0

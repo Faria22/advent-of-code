@@ -1,8 +1,10 @@
 from collections.abc import Iterator
-from typing import NamedTuple, Self
+from dataclasses import dataclass
+from typing import Self
 
 
-class Pos(NamedTuple):
+@dataclass(frozen=True, slots=True)
+class Pos:
     row: int
     col: int
 
