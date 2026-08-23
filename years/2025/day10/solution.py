@@ -112,7 +112,7 @@ def parse_data_part_one(data: str) -> list[LightMachine]:
     return machines
 
 
-def parse_data_part_two(data: str) -> list[LightMachine]:
+def parse_data_part_two(data: str) -> list[JoltageMachine]:
     machines = []
     for line in data.split('\n'):
         _, rest = line.split(' ', 1)

@@ -1,4 +1,4 @@
-# ruff: file-ignore[magic-value-comparison]  # ruff: ignore[unused-noqa]
+# ruff: file-ignore[magic-value-comparison]
 import numpy as np
 from solution import sum_surrounding
 

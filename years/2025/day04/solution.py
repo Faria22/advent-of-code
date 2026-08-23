@@ -19,7 +19,7 @@ def parse_input(data: str) -> np.ndarray:
     return grid
 
 
-def sum_surrounding(row: np.intp, col: np.intp, grid: np.ndarray) -> int:
+def sum_surrounding(row: int, col: int, grid: np.ndarray) -> int:
     left = col - 1
     right = col + 1
     up = row + 1
