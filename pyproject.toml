@@ -12,6 +12,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "pytest",
+    "ty>=0.0.74",
 ]
 
 [tool.uv.workspace]
