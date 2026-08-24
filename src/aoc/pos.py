@@ -23,6 +23,10 @@ class Pos:
     def __repr__(self) -> str:
         return f'({self.row}, {self.col})'
 
+    def __iter__(self) -> Iterator[int]:
+        yield self.row
+        yield self.col
+
     def shift(self, row_shift: int, col_shift: int) -> Self:
         return type(self)(self.row + row_shift, self.col + col_shift)
 
