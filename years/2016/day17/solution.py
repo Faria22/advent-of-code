@@ -1,5 +1,7 @@
 from pathlib import Path
 
+from aoc import get_hash
+
 INPUT_PATH = Path(__file__).parent / 'input.txt'
 
 
