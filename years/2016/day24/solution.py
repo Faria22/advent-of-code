@@ -12,6 +12,7 @@ INPUT_PATH = Path(__file__).parent / 'input.txt'
 sequence = count()
 
 
+@cache
 def parse_data(input_path: Path) -> tuple[frozenset[Pos], dict[int, Pos]]:
     walls = set()
     marked_locations = {}
