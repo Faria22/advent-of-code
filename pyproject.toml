@@ -5,6 +5,7 @@ description = "Shared utilities and solutions for Advent of Code"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "bidict>=0.24.1",
     "numba>=0.67.0",
     "numpy",
     "scipy",
